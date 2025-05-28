@@ -45,4 +45,7 @@ After a new variation is added, enter a loop for each rule type in sequence:
 
 ## Integrations Steps
 
-1. For Node.Js / JavaScript Projects:
+1. For Node.js / JavaScript projects:
+  - GitHub - https://github.com/wingify/vwo-fme-node-sdk
+  - Project README - https://github.com/wingify/vwo-fme-node-sdk/blob/master/README.md
+  - Official Documentation - https://developers.vwo.com/v2/docs/fme-node-install
