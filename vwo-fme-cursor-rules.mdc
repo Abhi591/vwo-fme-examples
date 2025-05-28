@@ -54,3 +54,8 @@ After a new variation is added, enter a loop for each rule type in sequence:
   - GitHub - https://github.com/wingify/vwo-fme-react-sdk
   - Project README - https://github.com/wingify/vwo-fme-react-sdk/blob/master/README.md
   - Official Documentation - https://developers.vwo.com/v2/docs/fme-react-install
+
+2. For Python projects:
+  - GitHub - https://github.com/wingify/vwo-fme-python-sdk
+  - Project README - https://github.com/wingify/vwo-fme-python-sdk/blob/master/README.md
+  - Official Documentation - https://developers.vwo.com/v2/docs/fme-python-install
