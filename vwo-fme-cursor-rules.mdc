@@ -215,7 +215,6 @@ try {
 Use this API to retrieve the value of a variable associated with a feature flag.
 
 ```php
-// Replace default_value based on the type of variable i.e. int|string|bool|json
 $variableValue = $flag->getVariable('variable_key', 'default_value');
 ```
 
@@ -254,7 +253,107 @@ $vwoClient->setAttribute($attributes, $userContext);
 
 > Replace attributes with a key-value user attributes.
 
+If programming language is Python
+
+### 1. Install SDK
+
+```bash
+pip install vwo-fme-python-sdk
+```
+
 ---
+
+### 2. Initialize the SDK
+
+Place this early in your app lifecycle or in a dedicated setup module:
+
+```python
+from vwo import init
+
+options = {
+   'sdk_key': 'VWO_SDK_KEY', # SDK Key
+   'account_id': 'VWO_ACCOUNT_ID' # VWO Account ID
+}
+
+vwo_client = init(options)
+```
+
+> 🔁 Replace `VWO_ACCOUNT_ID` and `VWO_SDK_KEY` with actual values.
+
+---
+
+### 3. Control the Feature Using the Flag
+
+Use this in your feature logic:
+
+```python
+user_context = { "id": "unique_user_id" }
+
+flag = vwo_client.get_flag("feature_key", user_context)
+is_feature_enabled = flag.is_enabled()
+
+if is_feature_enabled:
+    # Code if feature is enabled
+    pass
+else:
+    # Fallback behavior
+    pass
+```
+
+> 🧠 Customize `'feature_key'` and `'unique_user_id'` appropriately.
+
+### 4. Optional: `get_variable` API
+
+Use this API to retrieve the value of a variable associated with a feature flag.
+
+```python
+value = flag.get_variable("variable_key", "default_value")
+```
+
+> Replace `variable_key` and `default_value` with appropriate values.
+
+### 5. Optional:  `get_variables` API
+
+Use this API to retrieve values of all the flag variables as an array
+
+```python
+all_variables = flag.get_variables()
+```
+
+### 6. Optional: `track_event`
+
+Use this API to track a custom event with its associated properties
+
+```python
+event_properties = { "prop1": "value1", "prop2": "value2" }
+vwo_client.track_event("event_name", user_context, event_properties)
+```
+
+> Replace `event_name` and `event_properties` with actual values.
+
+### 7. Optional: `set_attribute`
+
+Use this API to set user attribute to be filter/segment reports
+
+```python
+attributes = { "attr1": "value1", "attr2": "value2" }
+vwo_client.set_attribute(attributes, user_context)
+```
+
+> Replace attributes with a key-value user attributes.
+
+---
+
+### 8. Optional: Add Error Handling
+
+```python
+try:
+    flag = vwo_client.get_flag("flag_key", {"id": "unique_user_id"})
+    is_feature_enabled = flag.is_enabled()
+except Exception as e:
+    print(f"Feature flag fetch failed: {e}")
+    # Handle fallback logic here
+```
 
 
 ---
