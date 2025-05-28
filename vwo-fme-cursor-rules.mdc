@@ -1,0 +1,44 @@
+# 🛠️ Cursor IDE Rule: Implement Feature Flag with VWO FME SDK
+
+## 🎯 Trigger Condition
+
+When the prompt contains any of the following phrases:
+
+- "implement a feature"
+- "feature flag"
+- "gate a feature"
+- "toggle a feature"
+- "control access to a feature"
+- and "similar texts for feature flagging"
+
+If the promt has below words like:
+- "already created"
+then skip directly to the integrations part.
+---
+
+## ❓ Clarifying Question
+
+Prompt the user:
+
+> Would you like to use the **VWO FME SDK** to implement this feature flag?
+
+If the user confirms, detect the programming language and proceed further. Check if MCP tool available for VWO Feature Flags. If yes, use tool first.
+Once MCP tool is done, ask If the user want to provide variation value for given variable.
+
+---
+
+## 🎯 User Response Condition
+If user wants to add a new variation value, then use tool.
+
+## 🎯 User Response Condition (after variation creation)
+After a new variation is added, enter a loop for each rule type in sequence:
+
+1. **Rollout Rules:**
+   - Prompt: > Would you like to create a rollout rule for this feature flag? (e.g., gradual rollout)
+   - If yes: Fetch environment list using tool, ask for envionment to use, ask for rule details, create the rule, ask if the rule should be enabled, and repeat this step.
+   - If no: Move to Testing/Personalize Rules.
+
+2. **Testing/Personalize Rules:**
+   - Loop: Prompt: > Would you like to create a testing or personalize rule for this feature flag? (e.g., A/B test or targeting specific users)
+   - If yes: Ask which type (testing or personalize), get details, create the rule, ask if the rule should be enabled, and repeat this step.
+   - If no: Ask If feature flag should be enabled to start using the feature, if the user confirms then toggle the feature flag using tool.
