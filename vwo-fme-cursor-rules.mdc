@@ -42,3 +42,7 @@ After a new variation is added, enter a loop for each rule type in sequence:
    - Loop: Prompt: > Would you like to create a testing or personalize rule for this feature flag? (e.g., A/B test or targeting specific users)
    - If yes: Ask which type (testing or personalize), get details, create the rule, ask if the rule should be enabled, and repeat this step.
    - If no: Ask If feature flag should be enabled to start using the feature, if the user confirms then toggle the feature flag using tool.
+
+## Integrations Steps
+
+1. For Node.Js / JavaScript Projects:
