@@ -151,7 +151,7 @@ $vwoClient->setAttribute($attributes, $userContext);
 ## 📚 Documentation
 
 Refer to the official SDK docs for advanced usage:
-👉 @https://developers.vwo.com/v2/docs/fme-node-install#/
+👉 @https://developers.vwo.com/v2/docs/fme-php-install#/
 
 -----
 
