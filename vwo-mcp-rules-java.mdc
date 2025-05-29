@@ -56,9 +56,15 @@ After a new variation is added, enter a loop for each rule type in sequence:
 
 ### 1. Install SDK
 
-```bash
-npm install vwo-fme-node-sdk
+```xml
+<dependency>
+    <groupId>com.vwo</groupId>
+    <artifactId>vwo-fme-java-sdk</artifactId>
+    <version>LATEST</version>
+</dependency>
 ```
+
+> Replace `LATEST` with the current version from the repo or Maven Central.
 
 ---
 
@@ -66,13 +72,16 @@ npm install vwo-fme-node-sdk
 
 Place this early in your app lifecycle or in a dedicated setup module:
 
-```ts
-import { init } from 'vwo-fme-node-sdk';
+```java
+import com.vwo.VWO;
+import com.vwo.models.user.VWOInitOptions;
 
-const vwoClient = await init({
-  accountId: 'VWO_ACCOUNT_ID',
-  sdkKey: 'VWO_SDK_KEY',
-});
+VWOInitOptions vwoInitOptions = new VWOInitOptions();
+vwoInitOptions.setSdkKey("VWO_SDK_KEY"); // Replace with your SDK key
+vwoInitOptions.setAccountId(VWO_ACCOUNT_ID); // Replace with your account ID
+
+// Initialize VWO instance
+VWO vwoClient = VWO.init(vwoInitOptions);
 ```
 
 > 🔁 Replace `VWO_ACCOUNT_ID` and `VWO_SDK_KEY` with actual values.
@@ -83,18 +92,23 @@ const vwoClient = await init({
 
 Use this in your feature logic:
 
-```ts
-// Set user context - id(required) - uniquely identifies a user
-const userContext = { id: 'unique_user_id' };
+```java
+import com.vwo.models.user.VWOContext;
+import com.vwo.models.user.GetFlag;
 
-// Returns a flag object which can be used to get flag's status or variable(s)
-const flag = await vwoClient.getFlag('feature_key', userContext);
+// Create user context
+VWOContext context = new VWOContext();
+context.setId("unique_user_id"); // Set a unique user identifier
+
+// Check if a feature flag is enabled
+GetFlag flag = vwoClient.getFlag("feature_key", context);
+Boolean isFeatureEnabled = flag.isEnabled();
 const isFeatureEnabled = flag.isEnabled();
 
 if (isFeatureEnabled) {
-  // Code if feature is enabled
+    // Code if feature is enabled
 } else {
-  // Fallback behavior
+    // Fallback behavior
 }
 ```
 
@@ -104,9 +118,9 @@ if (isFeatureEnabled) {
 
 Use this API to retrieve the value of a variable associated with a feature flag.
 
-```ts
-// Replace default_value based on the type of variable i.e. int|string|bool|json
-const value = flag.getVariable('variable_key', 'default_value');
+```java
+// Replace default_value based on the type of variable i.e. Integer|String|Boolean|Object
+String variableValue = (String) flag.getVariable("feature_variable", "default_value");
 ```
 
 > Replace `variable_key` and `default_value` with appropriate values.
@@ -115,73 +129,50 @@ const value = flag.getVariable('variable_key', 'default_value');
 
 Use this API to retrieve values of all the flag variables as an array
 
-```ts
+```java
 // Get value of all the variables of the flag
-const allVariables = flag.getVariables();
+List<Map<String, Object>> allVariables = flag.getVariables();
 ```
 
 ### 6. Optional: `trackEvent`
 
 Use this API to track a custom event with its associated properties
 
-```ts
+```java
 // Track a metric conversion for the specified event-name
-// eventProperties = { prop1: value1, prop2: value2 }
-vwoClient.trackEvent('event_name', userContext, eventProperties);
+Map<String, String> eventProperties = new HashMap<>();
+eventProperties.put("prop1", "10");
+
+vwoClient.trackEvent("eventName", context, eventProperties);
 ```
 
-> Replace `event_name` and `eventProperties` with actual values.
+> Replace `eventName` and `eventProperties` with actual values.
 
 ### 7. Optional: `setAttribute`
 
 Use this API to set user attribute to be filter/segment reports
 
-```ts
-// attributes = { attr1: value1, attr2: value2 }
-vwoClient.setAttribute(attributes, userContext);
+```java
+Map<String, Object> attributeMap = new HashMap<>();
+attributeMap.put("attribute-name", "attribute-value");
+vwoClient.setAttribute(attributeMap, userContext);
 ```
 
-> Replace attributes with a key-value user attributes.
+> Replace `attribute-name` and `attribute-value` with actual values.
 
----
-
-### 8. Optional: Add Error Handling
-
-```ts
-let isFeatureEnabled = false;
-try {
-  isFeatureEnabled = await client.getFlag('flag_key', { id: 'unique_user_id' });
-} catch (err) {
-  console.error('Feature flag fetch failed:', err);
-  // Handle fallback logic
-}
-```
 ---
 
 ## 📚 Documentation
 
 Refer to the official SDK docs for advanced usage:
-👉 @https://developers.vwo.com/v2/docs/fme-node-install#/
+👉 @https://developers.vwo.com/v2/docs/fme-java-install#/
 
 ---
-
-## ✅ Cursor Summary
-
-- Detect feature flag implementation intent
-- Ask whether to use relevant SDK eg: `vwo-fme-node-sdk`
-- If yes:
-  - Add installation step
-  - Add client initialization
-  - Insert flag check logic with optional error handling
-  - Provide doc reference
-
------
-
 
 Refer to the official SDK documentation for details on usage and parameters.
 Use below GitHub repositories based and thier corresponding official documentation
 
 1. For Node.js / JavaScript projects:
-  - GitHub - https://github.com/wingify/vwo-fme-node-sdk
-  - Project README - https://github.com/wingify/vwo-fme-node-sdk/blob/master/README.md
-  - Official Documentation - https://developers.vwo.com/v2/docs/fme-node-install
+  - GitHub - https://github.com/wingify/vwo-fme-java-sdk
+  - Project README - https://github.com/wingify/vwo-fme-java-sdk/blob/master/README.md
+  - Official Documentation - https://developers.vwo.com/v2/docs/fme-java-install
