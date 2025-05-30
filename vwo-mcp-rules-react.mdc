@@ -57,131 +57,152 @@ After a new variation is added, enter a loop for each rule type in sequence:
 ### 1. Install SDK
 
 ```bash
-npm install vwo-fme-node-sdk
+# via npm
+npm install vwo-fme-react-sdk --save
+
+# via yarn
+yarn add vwo-fme-react-sdk
 ```
 
 ---
 
-### 2. Initialize the SDK
+### 2. Setup VWOProvider in your React app
 
-Place this early in your app lifecycle or in a dedicated setup module:
+```tsx
+import React from 'react';
+import { VWOProvider, IVWOOptions, IVWOContextModel } from 'vwo-fme-react-sdk';
 
-```ts
-import { init } from 'vwo-fme-node-sdk';
+const vwoConfig: IVWOOptions = {
+  sdkKey: 'YOUR_VWO_SDK_KEY',      // Replace with your SDK key
+  accountId: 'YOUR_VWO_ACCOUNT_ID',// Replace with your Account ID
+  logger: { level: 'debug' },      // Optional for debugging
+};
 
-const vwoClient = await init({
-  accountId: 'VWO_ACCOUNT_ID',
-  sdkKey: 'VWO_SDK_KEY',
-});
+const userContext: IVWOContextModel = {
+  id: 'unique_user_id',            // Unique user ID
+};
+
+const fallbackComponent = <div>Loading feature flags...</div>;
+
+const App = () => (
+  <VWOProvider config={vwoConfig} userContext={userContext} fallbackComponent={fallbackComponent}>
+    <YourFeatureComponent />
+  </VWOProvider>
+);
+
+export default App;
+
 ```
 
-> 🔁 Replace `VWO_ACCOUNT_ID` and `VWO_SDK_KEY` with actual values.
+> 🔁 Replace `VWO_ACCOUNT_ID`, `VWO_SDK_KEY` and `unique_user_id` with actual values.
 
 ---
 
-### 3. Control the Feature Using the Flag
+### 3. Use the useGetFlag hook to check feature flag status in your component
 
-Use this in your feature logic:
+```tsx
+import React from 'react';
+import { useGetFlag } from 'vwo-fme-react-sdk';
 
-```ts
-// Set user context - id(required) - uniquely identifies a user
-const userContext = { id: 'unique_user_id' };
+const YourFeatureComponent = () => {
+  // Replace 'feature_key' with your feature flag key configured in VWO
+  const { flag, isReady } = useGetFlag('feature_key');
 
-// Returns a flag object which can be used to get flag's status or variable(s)
-const flag = await vwoClient.getFlag('feature_key', userContext);
-const isFeatureEnabled = flag.isEnabled();
+  if (!isReady) {
+    return <div>Loading feature state...</div>;
+  }
 
-if (isFeatureEnabled) {
-  // Code if feature is enabled
-} else {
-  // Fallback behavior
-}
+  if (flag.isEnabled()) {
+    return <div>The feature is ENABLED for you!</div>;
+  } else {
+    return <div>The feature is disabled. Showing fallback UI.</div>;
+  }
+};
+
+export default YourFeatureComponent;
+
 ```
 
-> 🧠 Customize `'feature_key'` and `'unique_user_id'` appropriately.
+> 🧠 Customize `feature_key` appropriately.
 
-### 4. Optional: `getVariable` API
+### 4. Optional: Access feature flag variables
+If your flag has variables, you can get them like this:
 
-Use this API to retrieve the value of a variable associated with a feature flag.
+```tsx
+import { useGetFlagVariable } from 'vwo-fme-react-sdk';
 
-```ts
-// Replace default_value based on the type of variable i.e. int|string|bool|json
-const value = flag.getVariable('variable_key', 'default_value');
+const YourFeatureComponent = () => {
+  const { flag, isReady } = useGetFlag('feature_key');
+
+  if (!isReady) return <div>Loading...</div>;
+
+  // Get variable value, e.g. a string variable with key 'button_color', fallback to 'blue'
+  const buttonColor = useGetFlagVariable(flag, 'variable_key', 'default_value');
+
+  return <button style={{ backgroundColor: buttonColor }}>Click Me</button>;
+};
+
 ```
 
-> Replace `variable_key` and `default_value` with appropriate values.
+> Replace `feature_key`, `variable_key` and `default_value` with appropriate values.
 
-### 5. Optional:  `getVariables` API
+### 5. Optional: Track custom events
 
-Use this API to retrieve values of all the flag variables as an array
+```tsx
+import { useTrackEvent } from 'vwo-fme-react-sdk';
 
-```ts
-// Get value of all the variables of the flag
-const allVariables = flag.getVariables();
-```
+const YourFeatureComponent = () => {
+  const { trackEvent, isReady } = useTrackEvent();
 
-### 6. Optional: `trackEvent`
+  if (!isReady) return null;
 
-Use this API to track a custom event with its associated properties
+  const handleClick = () => {
+    const eventProperties = { prop1: 'value1'};
+    trackEvent('event_name', eventProperties);
+  };
 
-```ts
-// Track a metric conversion for the specified event-name
-// eventProperties = { prop1: value1, prop2: value2 }
-vwoClient.trackEvent('event_name', userContext, eventProperties);
+  return <button onClick={handleClick}>Click Me</button>;
+};
+
 ```
 
 > Replace `event_name` and `eventProperties` with actual values.
 
 ### 7. Optional: `setAttribute`
 
-Use this API to set user attribute to be filter/segment reports
+```tsx
+import { useSetAttribute } from 'vwo-fme-react-sdk';
 
-```ts
-// attributes = { attr1: value1, attr2: value2 }
-vwoClient.setAttribute(attributes, userContext);
+const YourFeatureComponent = () => {
+  const { setAttribute, isReady } = useSetAttribute();
+
+  if (!isReady) return null;
+
+  const handleClick = () => {
+    const atrributes = { attribute1: 'value1'};
+    setAttribute(atrributes);
+  };
+
+  return <button onClick={handleClick}>Click Me</button>;
+};
+
 ```
 
 > Replace attributes with a key-value user attributes.
 
 ---
 
-### 8. Optional: Add Error Handling
-
-```ts
-let isFeatureEnabled = false;
-try {
-  isFeatureEnabled = await client.getFlag('flag_key', { id: 'unique_user_id' });
-} catch (err) {
-  console.error('Feature flag fetch failed:', err);
-  // Handle fallback logic
-}
-```
----
-
 ## 📚 Documentation
 
 Refer to the official SDK docs for advanced usage:
-👉 @https://developers.vwo.com/v2/docs/fme-node-install#/
+👉 @https://developers.vwo.com/v2/docs/fme-react-install#/
 
 ---
-
-## ✅ Cursor Summary
-
-- Detect feature flag implementation intent
-- Ask whether to use relevant SDK eg: `vwo-fme-node-sdk`
-- If yes:
-  - Add installation step
-  - Add client initialization
-  - Insert flag check logic with optional error handling
-  - Provide doc reference
-
------
-
 
 Refer to the official SDK documentation for details on usage and parameters.
 Use below GitHub repositories based and thier corresponding official documentation
 
 1. For Node.js / JavaScript projects:
-  - GitHub - https://github.com/wingify/vwo-fme-node-sdk
-  - Project README - https://github.com/wingify/vwo-fme-node-sdk/blob/master/README.md
-  - Official Documentation - https://developers.vwo.com/v2/docs/fme-node-install
+  - GitHub - https://github.com/wingify/vwo-fme-react-sdk
+  - Project README - https://github.com/wingify/vwo-fme-react-sdk/blob/master/README.md
+  - Official Documentation - https://developers.vwo.com/v2/docs/fme-react-install
