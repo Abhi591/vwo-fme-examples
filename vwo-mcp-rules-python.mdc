@@ -21,7 +21,7 @@ If the prompt contains:
 - "already implemented"
 - "existing feature flag"
 
-then **skip to the integration steps**.
+Get all feature flag details using tool and check for the matching feature flag and then **skip to the integration steps**.
 
 ---
 
@@ -76,6 +76,7 @@ After a new variation is added:
 ## 🔧 Integration Steps
 
 ### 1. Install SDK
+If not already installed, provide an option to run the following commands:
 
 ```bash
 pip install vwo-fme-python-sdk
