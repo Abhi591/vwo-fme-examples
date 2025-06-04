@@ -60,18 +60,24 @@ After a new variation is added:
    - This step is compulsory; the user must attach one metric before proceeding.
 
 2. **Rule Creation Loop:**
-
+   Ask if user wants to create any rollout or testing rule ? If yes then fetch all environment list and ask user which environment he wants to use for creating rules.
    Enter a loop for each rule type in sequence:
 
    1. **Rollout Rules:**
       - Prompt: > Would you like to create a rollout rule for this feature flag? (e.g., gradual rollout)
-      - If yes: Fetch environment list using tool, ask for environment to use, ask for rule details, create the rule, ask if the rule should be enabled, and repeat this step.
+      - If yes: ask for rule details, create the rule, ask if the rule should be enabled, and repeat this step.
       - If no: Move to Testing/Personalize Rules.
+      After Creating rule ask if user wants to enable this rule.
 
    2. **Testing/Personalize Rules:**
       - Loop: Prompt: > Would you like to create a testing or personalize rule for this feature flag? (e.g., A/B test or targeting specific users)
       - If yes: Ask which type (testing or personalize), get details, create the rule, ask if the rule should be enabled, and repeat this step.
-      - If no: Ask If feature flag should be enabled to start using the feature, if the user confirms then toggle the feature flag using tool.
+      After Creating rule ask if user wants to enable this rule.
+    
+   3. **Final Step - Enabling Feature Flag:**
+      - After all the rules have been created, ask:
+        Prompt: > "Would you like to enable the feature flag now to use it in your code?"
+        If Yes: Enable the feature flag.
 
 ## 🔧 Integration Steps
 
