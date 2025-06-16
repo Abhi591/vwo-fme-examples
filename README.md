@@ -71,6 +71,16 @@ We've chosen a simple yet practical application to demonstrate FME capabilities 
 - [FME Overview](https://developers.vwo.com/v2/docs/fme-overview)
 - [SDKs Reference](https://developers.vwo.com/v2/docs/list-of-fme-sdks#/)
 
+## Other Examples
+
+- [React Native Onboarding UI](https://github.com/wingify/vwo-fme-examples/tree/master/react-native-onboarding-ui)
+
+  A simple example mobile application showcasing VWO Feature Management and Experimentation (React Native SDK) integration, enabling dynamic feature flags to control and update the app's UI in real-time.
+
+- [React Web e-commerce App](https://github.com/wingify/vwo-fme-examples/tree/master/react-web-ecommerce-app)
+
+  A simple demo e-commerce app built with React, TypeScript, Tailwind CSS, Vite, and Redux Toolkit. It showcases standard features and integrates VWO for feature flagging and experiments.
+
 ## 💻 Development
 
 Run the below command in your terminal before you would like to develop and contribute
