@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "vwo-fme-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wingify/vwo-fme-ios-sdk.git",
+      "state" : {
+        "revision" : "cdd7f420a4e218584dfe53e2ae155fa5d57b4920",
+        "version" : "1.7.0"
+      }
+    }
+  ],
+  "version" : 2
+}
