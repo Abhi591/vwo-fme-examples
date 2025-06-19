@@ -81,6 +81,22 @@ We've chosen a simple yet practical application to demonstrate FME capabilities 
 
   A simple demo e-commerce app built with React, TypeScript, Tailwind CSS, Vite, and Redux Toolkit. It showcases standard features and integrates VWO for feature flagging and experiments.
 
+- [Mac OS App](https://github.com/wingify/vwo-fme-examples/tree/master/macos-swift)
+
+  A simple example mobile application showcasing VWO Feature Management and Experimentation (React Native SDK) integration, enabling dynamic feature flags and user interaction tracking.
+  
+- [Watch OS App](https://github.com/wingify/vwo-fme-examples/tree/master/watchos-swift)
+
+  A sleek watchOS application showcasing VWO Feature Management and Experimentation (FME) integration, enabling dynamic feature flags to customize UI elements and user interactions on Apple Watch.
+  
+- [TV OS App](https://github.com/wingify/vwo-fme-examples/tree/master/tvos-swift)
+
+  A sleek TVOS application showcasing VWO Feature Management and Experimentation (FME) integration, enabling dynamic feature flags to customize UI elements and user interactions on Apple TV.
+
+- [Android TV](https://github.com/wingify/vwo-fme-examples/tree/master/androidTvApp)
+
+  A demonstration Android TV application showcasing VWO Feature Management and Experimentation (FME) SDK integration for customizable UI elements and user interaction tracking. Browse through stunning travel destinations and plan your next adventure!
+
 ## 💻 Development
 
 Run the below command in your terminal before you would like to develop and contribute
