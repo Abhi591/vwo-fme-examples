@@ -86,5 +86,5 @@ After a new variation is added:
       - If yes: Ask which type (testing or personalize), get details, create the rule, ask if the rule should be enabled, and repeat this step.
       - If no: Ask If feature flag should be enabled to start using the feature, if the user confirms then toggle the feature flag using tool.
 
-## 🔧 Integration Steps
+# 🔧 Integration Steps
 
