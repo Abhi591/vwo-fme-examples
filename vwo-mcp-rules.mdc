@@ -2,15 +2,7 @@
 
 ## 🎯 Trigger Condition
 
-When the prompt contains any of the following phrases:
-
-- "implement a feature"
-- "enhance ..."
-- "feature flag"
-- "gate a feature"
-- "toggle a feature"
-- "control access to a feature"
-- and "similar texts for feature flagging"
+Whenever user tried to implement any functionality, show him the plan skip to ## ❓ Clarifying Question
 
 ---
 
@@ -37,15 +29,15 @@ Tell how using VWO FME help them rollout or A/B test the feature. Stop and wait 
 If the user confirms, ask whether to use a ready-to-use feature flag with the smart defaults or want step-by-step manual configuration.
 Stop and wait for the confirmation.
 
-If user confirms for ready-to-use or default one, show him the default values.
+- If user confirms for ready-to-use or default one, show him the default values.Stop and wait for the confirmation.
+
+    - Once the user confirms, call the CreateReadyToUseFeatureFlagTool or update the defaults if provided and then call the CreateReadyToUseFeatureFlagTool. Once flag is created. Ask for the confirmation to implement FME SDK.
+    Stop and wait for the confirmation.
+
+- If user confirms for the step-by-step or manual creation, then call the CreateFeatureFlag tool, followed by updating for variations, metrics, adding rules, and toggling rules and feature flag. Ask for the confirmation to integrate FME SDK.
 Stop and wait for the confirmation.
 
-Once the user confirms, call the CreateReadyToUseFlag MCP Tool or update the defaults if provided and then call the CreateReadyToUseFlag tool. Once flag is created. Ask for the confirmation to integrate FME SDK.
-Stop and wait for the confirmation.
-
-If user confirms for the step-by-step or manual creation, then call the CreateFeatureFlag tool, followed by updating for variations, metrics, adding rules, and toggling rules and feature flag. Ask for the confirmation to integrate FME SDK.
-Stop and wait for the confirmation.
-
+- To implement the SDK, don't call IntegrateSDKTool, always use # 🔧 Integration Steps as mentioned below in this rule file.
 
 ---
 
