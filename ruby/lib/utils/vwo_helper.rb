@@ -35,7 +35,10 @@ class VwoHelper
       account_id: CONFIG.vwo[:account_id],
       sdk_key: CONFIG.vwo[:sdk_key],
       logger: {transport: @custom_logger},
-      poll_interval: CONFIG.vwo[:poll_interval]
+      poll_interval: CONFIG.vwo[:poll_interval],
+      _vwo_meta: { # this is for internal use by VWO, DO NOT REMOVE
+        ea: 1
+      }
     }
     @vwo_client = VWO.init(sdk_config)
   end

@@ -40,6 +40,9 @@ class VWOHelper
                 'sdkKey' => Config::$SDK_KEY,
                 'logger' => [
                     'level' => Config::$LOG_LEVEL,
+                ],
+                '_vwo_meta' => [  // this is for internal use by VWO, DO NOT REMOVE
+                    'ea' => 1
                 ]
             ];
 

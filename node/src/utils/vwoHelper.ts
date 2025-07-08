@@ -51,6 +51,9 @@ async function initVwoClient(): Promise<void> {
       },
     },
     pollInterval: config.vwo.pollInterval,
+    _vwo_meta: {
+      ea: 1
+    }
   };
 
   vwoClient = await init(sdkConfig);

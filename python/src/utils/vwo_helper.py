@@ -31,7 +31,9 @@ def init_vwo_client():
         "logger": {
             "transport": custom_logger
         },
-        
+        '_vwo_meta': { # this is for internal use by VWO, DO NOT REMOVE
+            'ea': 1
+        }
     })
 
 def create_user_context(request: Request) -> Dict[str, Any]:
