@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Wingify Software Pvt. Ltd.
+ * Copyright (c) 2025 Wingify Software Pvt. Ltd.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,12 +31,12 @@ import kotlinx.coroutines.withContext
 
 class SmartBotRemoteDataSourceImpl : SmartBotRemoteDataSource {
 
-    private val defaultResponse = """To reset your password:  
-1. Open the app and go to the login screen.  
-2. Tap ‘Forgot Password?’ below the password field.  
-3. Enter your registered email address and submit.  
-4. Check your inbox for a password reset email (it may take a few minutes).  
-5. Click the link in the email and follow the instructions to create a new password.  
+    private val defaultResponse = """To reset your password:
+1. Open the app and go to the login screen.
+2. Tap ‘Forgot Password?’ below the password field.
+3. Enter your registered email address and submit.
+4. Check your inbox for a password reset email (it may take a few minutes).
+5. Click the link in the email and follow the instructions to create a new password.
 6. Return to the app and log in with your new password."""
 
     override suspend fun sendChatQuery(userId: String, query: String): ChatResponse? =
