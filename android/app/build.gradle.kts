@@ -78,6 +78,11 @@ android {
             "MIXPANEL_PROJECT_TOKEN",
             "\"${getProperty("MIXPANEL_PROJECT_TOKEN", "")}\""
         )
+        buildConfigField(
+            "String",
+            "SEGMENT_WRITE_KEY",
+            "\"${getProperty("SEGMENT_WRITE_KEY", "")}\""
+        )
     }
 
     buildTypes {
@@ -112,6 +117,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.mix.panel)
     implementation(libs.vwo.fme)
+    implementation(libs.segment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fmeexample.BuildConfig
 import com.example.fmeexample.analytics.MixpanelIntegration
+import com.example.fmeexample.analytics.SegmentIntegration
 import com.example.fmeexample.fme.FmeHelper
 import com.example.fmeexample.models.ChatResponse
 import com.example.fmeexample.models.UserInfo
@@ -38,34 +39,66 @@ class SmartBotViewModel(private val chatQueryUseCase: SendChatQueryUseCaseImpl) 
     val userInfo: LiveData<UserInfo> = _userInfo
 
     private var mixpanelIntegration: MixpanelIntegration? = null
+    private var segmentIntegration: SegmentIntegration? = null
 
     suspend fun init(context: Context) {
-        // Get Mixpanel token from BuildConfig
-        val mixpanelToken = BuildConfig.MIXPANEL_PROJECT_TOKEN
-
-        val integrations = if (mixpanelToken.isNotEmpty()) {
-            // Initialize Mixpanel
-            mixpanelIntegration = MixpanelIntegration.getInstance(context, mixpanelToken)
-
-            object : IntegrationCallback {
-                override fun execute(properties: Map<String, Any>) {
-                    // Check if this is a flag evaluation or event tracking
-                    if (properties["api"] == "track") {
-                        // This is event tracking
-                        val eventName = properties["eventName"] as String
-                        mixpanelIntegration?.trackEvent(eventName, properties)
-
-                    } else if (properties.containsKey("featureName")) {
-                        // This is a flag evaluation
-                        mixpanelIntegration?.trackFlagEvaluation(properties)
-                    }
-                }
-            }
-        } else {
-            null
-        }
         loadInitialData()
-        initFme(context, integrations)
+        initFme(context, createAnalyticsIntegration(context))
+    }
+
+    private fun createAnalyticsIntegration(context: Context): IntegrationCallback? {
+        val mixpanelToken = BuildConfig.MIXPANEL_PROJECT_TOKEN
+        val segmentWriteKey = BuildConfig.SEGMENT_WRITE_KEY
+
+        if (mixpanelToken.isEmpty() && segmentWriteKey.isEmpty()) {
+            return null
+        }
+
+        initializeMixpanel(context, mixpanelToken)
+        initializeSegment(context, segmentWriteKey)
+
+        return object : IntegrationCallback {
+            override fun execute(properties: Map<String, Any>) {
+                handleEventTracking(properties)
+                handleFlagEvaluation(properties)
+            }
+        }
+    }
+
+    private fun initializeMixpanel(context: Context, token: String) {
+        if (token.isNotEmpty()) {
+            mixpanelIntegration = MixpanelIntegration.getInstance(context, token)
+        }
+    }
+
+    private fun initializeSegment(context: Context, writeKey: String) {
+        if (writeKey.isNotEmpty()) {
+            segmentIntegration = SegmentIntegration.getInstance(context, writeKey)
+        }
+    }
+
+    private fun handleEventTracking(properties: Map<String, Any>) {
+        if (properties["api"] == "track") {
+            val eventName = properties["eventName"] as String
+            mixpanelIntegration?.trackEvent(eventName, properties)
+            segmentIntegration?.trackEvent(properties)
+        }
+    }
+
+    private fun handleFlagEvaluation(properties: Map<String, Any>) {
+        if (properties.containsKey("featureName")) {
+            mixpanelIntegration?.trackFlagEvaluation(properties)
+            segmentIntegration?.trackFlagEvaluation(properties)
+
+            // Identify user in Segment
+            val userId = properties["userId"] as? String
+            if (!userId.isNullOrEmpty()) {
+                segmentIntegration?.identify(userId, mapOf(
+                    "featureName" to (properties["featureName"] ?: ""),
+                    "variationId" to (properties["experimentVariationId"] ?: "")
+                ))
+            }
+        }
     }
 
     private fun loadInitialData() {

@@ -1,19 +1,3 @@
-3. Set below environment variables in `local.properties`.
-
-    ```properties
-   FME_ACCOUNT_ID=
-   FME_SDK_KEY=
-   FLAG_NAME=
-   EVENT_NAME=
-   VARIABLE_1_KEY=
-   VARIABLE_2_KEY=
-   VARIABLE_2_CONTENT=
-   VARIABLE_2_BG=
-   MAX_LOG_MESSAGES=
-   # Add mixpanel token here if you want to track events in Mixpanel
-   MIXPANEL_PROJECT_TOKEN=
-    ```
-
 # 🤖 Smart Bot with VWO FME Integration
 
 > A simple example mobile application showcasing VWO Feature Management and Experimentation (Android SDK) integration, enabling dynamic feature flags and user interaction tracking.
