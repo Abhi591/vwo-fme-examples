@@ -12,6 +12,7 @@
   "dependencies": {
     "@capacitor/android": "^7.2.0",
     "@capacitor/core": "^7.2.0",
+    "@capacitor/ios": "^7.2.0",
     "cordova-insights": "file:.yalc/cordova-insights",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
