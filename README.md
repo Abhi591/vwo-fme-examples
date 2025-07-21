@@ -42,6 +42,7 @@ Select your preferred technology stack to explore the implementation:
   - [JavaScript](https://github.com/wingify/vwo-fme-examples/tree/master/javascript)
   - [React-Native](https://github.com/wingify/vwo-fme-examples/tree/master/react-native)
   - [React-Web](https://github.com/wingify/vwo-fme-examples/tree/master/react-web)
+  - [Ionic](https://github.com/wingify/vwo-fme-examples/tree/master/ionic)
 
 ## 🌟 Why This Example?
 
@@ -96,6 +97,10 @@ We've chosen a simple yet practical application to demonstrate FME capabilities 
 - [Android TV](https://github.com/wingify/vwo-fme-examples/tree/master/android-tv-app)
 
   A demonstration Android TV application showcasing VWO Feature Management and Experimentation (FME) SDK integration for customizable UI elements and user interaction tracking. Browse through stunning travel destinations and plan your next adventure!
+
+- [Capacitor](https://github.com/wingify/vwo-fme-examples/tree/master/capacitor)
+
+  This example app demonstrates how VWO FullStack Feature Management & Experimentation (FME) can be integrated into Capacitor-based projects. It showcases the use of the VWO JavaScript SDK to implement feature flags and A/B testing seamlessly within a hybrid mobile app environment.
 
 ## 💻 Development
 
