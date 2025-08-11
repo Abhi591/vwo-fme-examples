@@ -1,0 +1,48 @@
+{
+  "name": "vwo-fme-cordova-example",
+  "displayName": "VWO FME Cordova Example",
+  "version": "1.0.0",
+  "description": "A Smart Bot application showcasing VWO Feature Management and Experimentation (FME) integration with Cordova based mobile applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-browser",
+    "vwo",
+    "fme",
+    "feature-management"
+  ],
+  "author": "VWO FME Example Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-browser": "~6.0.0",
+    "cordova-ios": "~7.0.0",
+    "cordova-plugin-device": "~2.1.0",
+    "cordova-plugin-file": "~8.0.0",
+    "cordova-plugin-inappbrowser": "~5.0.0",
+    "cordova-plugin-network-information": "~3.0.0",
+    "cordova-plugin-statusbar": "~3.0.0"
+  },
+  "devDependencies": {
+    "cordova": "^12.0.0",
+    "cordova-android": "^12.0.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-network-information": {}
+    },
+    "platforms": [
+      "ios",
+      "browser",
+      "android"
+    ]
+  }
+}
