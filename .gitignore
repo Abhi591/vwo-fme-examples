@@ -11,3 +11,8 @@ npm-debug.log*
 .DS_Store
 
 *.prefs
+
+# iOS/CocoaPods
+Pods/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
