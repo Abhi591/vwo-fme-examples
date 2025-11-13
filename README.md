@@ -34,6 +34,7 @@ Select your preferred technology stack to explore the implementation:
   - [PHP](https://github.com/wingify/vwo-fme-examples/tree/master/php)
   - [Python](https://github.com/wingify/vwo-fme-examples/tree/master/python)
   - [Ruby](https://github.com/wingify/vwo-fme-examples/tree/master/ruby)
+  - [Go](https://github.com/wingify/vwo-fme-examples/tree/master/go)
 
 * Client-side
   - [Android](https://github.com/wingify/vwo-fme-examples/tree/master/android)
