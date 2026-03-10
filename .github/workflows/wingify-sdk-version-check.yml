@@ -1,0 +1,14 @@
+name: Wingify SDK version check
+
+on: push
+
+jobs:
+  check-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Wingify SDK versions
+        uses: Abhi591/wingify-sdk-version-check@main
+        # 1with:
+        #   slack_webhook: ${{ secrets.WINGIFY_SDK_SLACK_WEBHOOK }}

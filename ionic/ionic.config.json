@@ -1,7 +1,0 @@
-{
-  "name": "vwo-fme-ionic-example",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}
