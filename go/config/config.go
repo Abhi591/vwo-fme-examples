@@ -44,7 +44,7 @@ type Config struct {
 
 var appConfig *Config
 
-// LoadConfig loads configuration from environment variables
+// LoadConfig loads configuration from environment ariables
 func LoadConfig() (*Config, error) {
 	if appConfig != nil {
 		return appConfig, nil
