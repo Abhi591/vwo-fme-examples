@@ -37,7 +37,7 @@
         <!-- <dependency>
             <groupId>com.vwo.sdk</groupId>
             <artifactId>vwo-fme-java-sdk</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.5</version>
         </dependency> -->
 
         <!-- Spring Boot DevTools (for easier development and reloading) -->
