@@ -34,11 +34,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.vwo.sdk/vwo-fme-java-sdk -->
-        <dependency>
+        <!-- <dependency>
             <groupId>com.vwo.sdk</groupId>
             <artifactId>vwo-fme-java-sdk</artifactId>
             <version>1.21.0</version>
-        </dependency>
+        </dependency> -->
 
         <!-- Spring Boot DevTools (for easier development and reloading) -->
         <dependency>
