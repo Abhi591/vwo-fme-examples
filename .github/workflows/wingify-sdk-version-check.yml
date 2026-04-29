@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check Wingify SDK versions
-        uses: Abhi591/wingify-sdk-version-check@testing
+        uses: Abhi591/wingify-sdk-version-check@msgUpdate-p
         env:
           SLACK_NOTIFICATIONS_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
